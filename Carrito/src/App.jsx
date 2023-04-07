@@ -1,5 +1,5 @@
 function App() {
-	const products = [
+/* 	const products = [
 		{
 			id: '1u',
 			Nombre: 'Nike Dunk High Retro',
@@ -16,7 +16,7 @@ function App() {
 			Descripcion: 'good Nike shoes',
 			url: 'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f f5f5f5/cdb4e7b0-7772-41aa-82c0-4306f53050b6/zoom-fly-5-zapatillas-de-running-carretera-6PMLS5.png',
 		},
-	];
+	]; */
 
 	return <div></div>;
 }
