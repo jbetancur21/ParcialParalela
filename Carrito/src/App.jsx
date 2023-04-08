@@ -1,3 +1,6 @@
+import ListaProductos from "./components/ListaProductos";
+
+
 function App() {
 /* 	const products = [
 		{
@@ -18,7 +21,9 @@ function App() {
 		},
 	]; */
 
-	return <div></div>;
+	return <div>
+		<ListaProductos/>
+	</div>;
 }
 
 export default App;
