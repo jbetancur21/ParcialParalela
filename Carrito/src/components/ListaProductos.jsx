@@ -1,3 +1,4 @@
+import styles from './ListaProductos.module.css';
 import { useState } from 'react';
 
 const ListaProductos = () => {
@@ -8,14 +9,14 @@ const ListaProductos = () => {
 			Precio: 120,
 			cantDisponible: 5,
 			Descripcion: 'Really good Nike shoes',
-			url: 'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:b:f5f5f5/608d6f2b-f6eb-4a5f-8535-6f24b081e011/dunk-high-retro-zapatillas-tjf3hz.png',
+			url: 'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/ec602aa2-b8e6-4a6e-97fe-9ed8e7febb87/dunk-high-zapatillas-lC4X8h.png',
 		},
 		{
 			id: '2u',
 			Nombre: 'Nike Zoom Fly 5',
 			Precio: 150,
 			cantDisponible: 3,
-			Descripcion: 'good Nike shoes',
+			Descripcion: 'Good Nike shoes',
 			url: 'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/cdb4e7b0-7772-41aa-82c0-4306f53050b6/zoom-fly-5-zapatillas-de-running-carretera-6PMLS5.png',
 		},
 		{
@@ -39,17 +40,16 @@ const ListaProductos = () => {
 
 	return (
 		<div>
-			<h2>Lista</h2>
-			<div>
+			<div className={styles.Cuadricula}>
 				{arrayProductos.map(item => {
 					return (
 						<div>
-							<h4>{item.Nombre}</h4>
-							<img src={item.url} width='15%' />
-							<p>Precio: {item.Precio}$</p>
-							<p>Unidades disponibles: {item.cantDisponible}</p>
-							<p>Descripción del Producto: {item.Descripcion}</p>
-							<hr />
+							<img src={item.url} width='100%' />
+							<h2>{item.Nombre}</h2>
+							<p>{item.Descripcion}</p>
+							<p>{item.cantDisponible} Unidades disponibles</p>
+							<p className={styles.Precio}>{item.Precio}$</p>
+							<button>Añadir al carrito</button>
 						</div>
 					);
 				})}

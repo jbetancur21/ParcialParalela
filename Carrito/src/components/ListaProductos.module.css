@@ -1,0 +1,13 @@
+.Precio{
+    font-weight: bold;
+    font-style: italic;
+}
+
+.Cuadricula{
+    text-align: center;
+    display: flex;
+    margin: 1%;
+    padding: 5%;
+    background-color: rgba(185, 185, 185, 0.151);
+    
+}
