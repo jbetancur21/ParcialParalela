@@ -5,20 +5,25 @@ const ListaProductos = ({
 	setProducto,
 	setShoppingCart,
 }) => {
-
-
 	const añadirCarrito = array => {
-
+		const bandera =  arrayShoppingCart.filter(existe => existe.id === array.id).length;
 		
-		const newProductCart = {
-			id: array.id,
-			Nombre: array.Nombre,
-			Precio: array.Precio,
-			cantDisponible: 1,
-			Descripcion: array.Descripcion,
-			url: array.url,
-		};
-		setShoppingCart([...arrayShoppingCart, newProductCart]);
+		if(bandera >0){
+
+		}else{
+			const newProductCart = {
+				id: array.id,
+				Nombre: array.Nombre,
+				Precio: array.Precio,
+				cantDisponible: 1,
+				Descripcion: array.Descripcion,
+				url: array.url,
+			};
+			setShoppingCart([...arrayShoppingCart, newProductCart]);
+		}
+
+
+			
 	};
 
 	return (
@@ -44,7 +49,7 @@ const ListaProductos = ({
 				<h2>Carrito de Compras ({arrayShoppingCart.length})</h2>
 				{arrayShoppingCart.map(elemento => {
 					return (
-						<div className={styles.productosCarrito}>
+						<div key={elemento.id} className={styles.productosCarrito}>
 							<div className={styles.imagen}>
 								<img src={elemento.url} width='40%' />
 							</div>
