@@ -4,7 +4,8 @@ const TodoList = ({ todos, setTodos }) => {
 	const deleteTodo = ({ id }) => {
 		setTodos(todos.filter(todo => todo.id !== id));
 	};
-
+	
+//...form  copia el objeto y lopega tal cual en el set form
 	const completedTodo = todo => {
 		const newTodos = todos.map(item =>
 			item.id === todo.id ? { ...todo, completed: !item.completed } : item

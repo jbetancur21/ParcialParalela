@@ -3,11 +3,35 @@
     font-style: italic;
 }
 
-.Cuadricula{
+.Productos{
     text-align: center;
     display: flex;
     margin: 1%;
     padding: 5%;
-    background-color: rgba(185, 185, 185, 0.151);
+    background-color: rgb(246,246,246);
     
+}
+
+
+/*--------------------------------------------------------*/
+.Carrito{
+    margin: 1%;
+    padding: 5%;
+    background-color: rgb(246,246,246);
+    
+}
+
+.productosCarrito{
+    display: flex;
+    width: 100%;
+}
+
+.imagen{
+    width: 50%;
+    text-align: center;
+}
+.texto{
+    padding: 8% 0% 0% 0%;
+    width: 50%;
+    text-align: left;
 }
