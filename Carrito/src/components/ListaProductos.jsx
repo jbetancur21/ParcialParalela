@@ -9,7 +9,7 @@ const ListaProductos = ({
 		const bandera =  arrayShoppingCart.filter(existe => existe.id === array.id).length;
 		
 		if(bandera >0){
-
+			/* setShoppingCart({...arrayShoppingCart,cantDisponible:2}); */
 		}else{
 			const newProductCart = {
 				id: array.id,
