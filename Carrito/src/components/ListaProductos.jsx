@@ -1,36 +1,8 @@
 import styles from './ListaProductos.module.css';
-const ListaProductos = ({
-	arrayProductos,
-	arrayShoppingCart,
-	setProducto,
-	setShoppingCart,
-}) => {
+import Producto from "./Producto"
+const ListaProductos = ({arrayProductos,arrayShoppingCart,setProducto,setShoppingCart}) => {
 	
-	const añadirCarrito = array => {
-		const bandera = arrayShoppingCart.filter(
-			existe => existe.id === array.id
-		).length;
 
-		if (bandera > 0) {
-			/* setShoppingCart({...arrayShoppingCart,cantDisponible:2}); */
-		} else {
-			const newProductCart = {
-				id: array.id,
-				Nombre: array.Nombre,
-				Precio: array.Precio,
-				cantDisponible: 1,
-				Descripcion: array.Descripcion,
-				url: array.url,
-			};
-			setShoppingCart([...arrayShoppingCart, newProductCart]);
-
-			const quitarPiezaListaProductos = arrayProductos.map(item =>
-				item.id === array.id?{...item,cantDisponible:item.cantDisponible-1}:item
-			);
-			setProducto(quitarPiezaListaProductos);
-
-		}
-	};
 
 	const añadirPiezas = array =>{
 
@@ -89,22 +61,12 @@ const ListaProductos = ({
 
 	return (
 		<div>
-			<div className={styles.Productos}>
-				{arrayProductos.map(item => {
-					return (
-						<div key={item.id}>
-							<img src={item.url} width='100%' />
-							<h2>{item.Nombre}</h2>
-							<p>{item.Descripcion}</p>
-							<p>{item.cantDisponible} Unidades disponibles</p>
-							<p className={styles.Precio}>{item.Precio}$</p>
-							<button onClick={() => añadirCarrito(item)}>
-								Añadir al carrito
-							</button>
-						</div>
-					);
-				})}
-			</div>
+				<Producto
+					arrayShoppingCart={arrayShoppingCart}
+					setShoppingCart={setShoppingCart}
+					arrayProductos={arrayProductos}
+					setProducto={setProducto}
+				/>
 
 			<div className={styles.Carrito}>
 				<h2>Carrito de Compras ({arrayShoppingCart.length})</h2>
@@ -119,9 +81,9 @@ const ListaProductos = ({
 								<p>{elemento.Descripcion}</p>
 								<p className={styles.Precio}>{elemento.Precio}$</p>
 								<div className={styles.añadir}>
-									<button onClick={()=>quitarPiezas(elemento)}>-</button>
+									<button onClick={() => quitarPiezas(elemento)}>-</button>
 									<p>{elemento.cantDisponible} Pieza(s)</p>
-									<button onClick={()=>añadirPiezas(elemento)}>+</button>
+									<button onClick={() => añadirPiezas(elemento)}>+</button>
 								</div>
 							</div>
 						</div>
