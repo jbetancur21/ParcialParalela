@@ -64,9 +64,9 @@ const [totalPagar, settotalPagar] = useState(0);
 		}
 	}
 
-	const crearDescuento = ()=>{
+/* 	const crearDescuento = ()=>{
 		settotalPagar(totalPagar-descuento)
-	}
+	} */
 
 	const quitarPiezas = array => {
 		//array es el arreglo de los productos del carrito y existe es el de todo el listado de productos
@@ -134,13 +134,13 @@ const [totalPagar, settotalPagar] = useState(0);
 				</div>
 
 				<div className={styles.Summary}>
-					<h2>Total a Pagar: {totalPagar}$</h2>
+					<h2>Total a Pagar: {totalPagar-Number(descuento)}$</h2>
 					<input type="number" placeholder="Valor Descuento($)" value={descuento} onChange={asignarDescuento}/>
-					<button onClick={crearDescuento}>Aplicar</button>
+					{/* <button onClick={crearDescuento}>Aplicar</button> */}
 					<hr />
-					<h3>Subtotal: </h3><p>{totalPagar+Number(descuento)}$</p>
+					<h3>Subtotal: </h3><p>{totalPagar}$</p>
 					<h3>Envío: </h3><p>GRATIS</p>
-					<h3>Cupón: </h3><p>{descuento}$</p>
+					<h3>Cupón: </h3><p>{Number(descuento)}$</p>
 
 				</div>
 
