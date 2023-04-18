@@ -14,10 +14,32 @@
 
 
 /*--------------------------------------------------------*/
+.SecCarrito{
+    display: flex;
+}
+
 .Carrito{
     margin: 1%;
     padding: 5%;
+    width: 50%;
     background-color: rgb(246,246,246);
+    
+}
+
+.Summary{
+    margin: 1%;
+    padding: 5%;
+    width: 50%;
+    background-color: rgba(246,246,246);
+    
+}
+
+.Summary input{
+   border-radius: 5px;
+   border-color: rgba(243, 243, 243, 0.2);
+   padding: 1%;
+   font-size: 20px;
+   width: 80%;
     
 }
 

@@ -4,20 +4,25 @@ import { useState } from 'react';
 import Producto from "./Producto"
 const ListaProductos = ({arrayProductos,arrayShoppingCart,setProducto,setShoppingCart}) => {
 
-
+const [cont, setCont] = useState(0);	
 const [totalPagar, settotalPagar] = useState(0);	
 
 	useEffect(
 		() => {
 			let total = 0;
-			if(arrayShoppingCart.length ===0){
+			let contador = 0;
+			if (arrayShoppingCart.length === 0) {
 				settotalPagar(0);
-			}else{
+				setCont(0);
+			} else {
 				for (var i = 0; i < arrayShoppingCart.length; i++) {
-					settotalPagar(total +
-						arrayShoppingCart[i].Precio * arrayShoppingCart[i].cantDisponible)
-						
+					total =
+						total +
+						arrayShoppingCart[i].Precio * arrayShoppingCart[i].cantDisponible;
+					contador = contador + arrayShoppingCart[i].cantDisponible;
 				}
+				settotalPagar(total);
+				setCont(contador);
 			}
 			
 		},
@@ -88,30 +93,42 @@ const [totalPagar, settotalPagar] = useState(0);
 				setProducto={setProducto}
 			/>
 
-
-			<div className={styles.Carrito}>
-				<h2>Carrito de Compras ({arrayShoppingCart.length})</h2>
-				{arrayShoppingCart.map(elemento => {
-					return (
-						<div key={elemento.id} className={styles.productosCarrito}>
-							<div className={styles.imagen}>
-								<img src={elemento.url} width='40%' />
-							</div>
-							<div className={styles.texto} key={elemento.id}>
-								<h3>{elemento.Nombre}</h3>
-								<p>{elemento.Descripcion}</p>
-								<p className={styles.Precio}>{elemento.Precio}$</p>
-								<div className={styles.añadir}>
-									<button onClick={() => quitarPiezas(elemento)}>-</button>
-									<p>{elemento.cantDisponible} Pieza(s)</p>
-									<button onClick={() => añadirPiezas(elemento)}>+</button>
+			<div className={styles.SecCarrito}>
+				<div className={styles.Carrito}>
+					<h2>Carrito de Compras ({cont})</h2>
+					{arrayShoppingCart.map(elemento => {
+						return (
+							<div key={elemento.id} className={styles.productosCarrito}>
+								<div className={styles.imagen}>
+									<img src={elemento.url} width='40%' />
+								</div>
+								<div className={styles.texto} key={elemento.id}>
+									<h3>{elemento.Nombre}</h3>
+									<p>{elemento.Descripcion}</p>
+									<p className={styles.Precio}>{elemento.Precio}$</p>
+									<div className={styles.añadir}>
+										<button onClick={() => quitarPiezas(elemento)}>-</button>
+										<p>{elemento.cantDisponible} Pieza(s)</p>
+										<button onClick={() => añadirPiezas(elemento)}>+</button>
+									</div>
 								</div>
 							</div>
-						</div>
-					);
-				})}
-			</div>
+						);
+					})}
+				</div>
 
+				<div className={styles.Summary}>
+					<h2>Total a Pagar:</h2>
+					<input type="text" placeholder="Valor Descuento" />
+					<button>Aplicar</button>
+					<hr />
+					<h3>Subtotal: </h3><p>{totalPagar}$</p>
+					<h3>Envío: </h3><p>GRATIS</p>
+					<h3>Cupón: </h3><p>$</p>
+
+				</div>
+
+			</div>
 		</div>
 	);
 };
