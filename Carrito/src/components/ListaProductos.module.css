@@ -6,7 +6,7 @@
 .Productos{
     text-align: center;
     display: flex;
-    margin: 1%;
+    /* margin: 1%; */
     padding: 5%;
     background-color: rgb(246,246,246);
     
