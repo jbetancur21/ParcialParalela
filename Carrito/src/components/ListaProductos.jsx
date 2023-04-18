@@ -59,6 +59,7 @@ const [totalPagar, settotalPagar] = useState(0);
 		if(target.value<101){
 			setDescuento(target.value)
 		}else{
+			setDescuento(0)
 			alert("El descuento no puede ser mayor a 100$")
 		}
 	}
@@ -134,10 +135,10 @@ const [totalPagar, settotalPagar] = useState(0);
 
 				<div className={styles.Summary}>
 					<h2>Total a Pagar: {totalPagar}$</h2>
-					<input type="number" placeholder="Valor Descuento" value={descuento} onChange={asignarDescuento}/>
+					<input type="number" placeholder="Valor Descuento($)" value={descuento} onChange={asignarDescuento}/>
 					<button onClick={crearDescuento}>Aplicar</button>
 					<hr />
-					<h3>Subtotal: </h3><p>{totalPagar}$</p>
+					<h3>Subtotal: </h3><p>{totalPagar+Number(descuento)}$</p>
 					<h3>Envío: </h3><p>GRATIS</p>
 					<h3>Cupón: </h3><p>{descuento}$</p>
 
