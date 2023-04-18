@@ -1,72 +1,93 @@
+import { useEffect } from 'react';
 import styles from './ListaProductos.module.css';
+import { useState } from 'react';
 import Producto from "./Producto"
 const ListaProductos = ({arrayProductos,arrayShoppingCart,setProducto,setShoppingCart}) => {
-	
 
 
-	const añadirPiezas = array =>{
+const [totalPagar, settotalPagar] = useState(0);	
 
+	useEffect(
+		() => {
+			let total = 0;
+			if(arrayShoppingCart.length ===0){
+				settotalPagar(0);
+			}else{
+				for (var i = 0; i < arrayShoppingCart.length; i++) {
+					settotalPagar(total +
+						arrayShoppingCart[i].Precio * arrayShoppingCart[i].cantDisponible)
+						
+				}
+			}
+			
+		},
+		[arrayShoppingCart]
+	);
+
+
+	const añadirPiezas = array => {
 		//array es el arreglo de los productos del carrito y existe es el de todo el listado de productos
 
-		const bandera = arrayProductos.filter(
-			existe => existe.id === array.id
-		)//Este es un filtro del arreglo de los Productos
-		
+		const bandera = arrayProductos.filter(existe => existe.id === array.id); //Este es un filtro del arreglo de los Productos
 
-		if(bandera[0].cantDisponible>0){
-
+		if (bandera[0].cantDisponible > 0) {
 			const añadirPiezaCarrito = arrayShoppingCart.map(item =>
-				item.id === array.id?{...array,cantDisponible:array.cantDisponible+1}:item
+				item.id === array.id
+					? { ...array, cantDisponible: array.cantDisponible + 1 }
+					: item
 			);
 			setShoppingCart(añadirPiezaCarrito);
 
 			const quitarPiezaListaProductos = arrayProductos.map(item =>
-				item.id === array.id?{...item,cantDisponible:item.cantDisponible-1}:item
+				item.id === array.id
+					? { ...item, cantDisponible: item.cantDisponible - 1 }
+					: item
 			);
 			setProducto(quitarPiezaListaProductos);
-			
-			
-		}else(
-			alert("Ya no hay unidades Disponibles de este producto")
-		)
-	}
+		} else alert('Ya no hay unidades Disponibles de este producto');
+	};
 
-	const quitarPiezas = array =>{
-
+	const quitarPiezas = array => {
 		//array es el arreglo de los productos del carrito y existe es el de todo el listado de productos
 
-		const bandera = arrayShoppingCart.filter(
-			existe => existe.id === array.id
-		)//Este es un filtro del arreglo de los Productos
+		const bandera = arrayShoppingCart.filter(existe => existe.id === array.id); //Este es un filtro del arreglo de los Productos
 
-		if(bandera[0].cantDisponible>1){
-
+		if (bandera[0].cantDisponible > 1) {
 			const quitarPiezaCarrito = arrayShoppingCart.map(item =>
-				item.id === array.id?{...array,cantDisponible:array.cantDisponible-1}:item
+				item.id === array.id
+					? { ...array, cantDisponible: array.cantDisponible - 1 }
+					: item
 			);
 			setShoppingCart(quitarPiezaCarrito);
 
 			const añadirPiezaListaProductos = arrayProductos.map(item =>
-				item.id === array.id?{...item,cantDisponible:item.cantDisponible+1}:item
+				item.id === array.id
+					? { ...item, cantDisponible: item.cantDisponible + 1 }
+					: item
 			);
 			setProducto(añadirPiezaListaProductos);
-		}else{
-			setShoppingCart(arrayShoppingCart.filter(elemento=> elemento.id !== array.id))
+		} else {
+			setShoppingCart(
+				arrayShoppingCart.filter(elemento => elemento.id !== array.id)
+			);
 			const añadirPiezaListaProductos = arrayProductos.map(item =>
-				item.id === array.id?{...item,cantDisponible:item.cantDisponible+1}:item
+				item.id === array.id
+					? { ...item, cantDisponible: item.cantDisponible + 1 }
+					: item
 			);
 			setProducto(añadirPiezaListaProductos);
 		}
-	}
+	};
 
 	return (
 		<div>
-				<Producto
-					arrayShoppingCart={arrayShoppingCart}
-					setShoppingCart={setShoppingCart}
-					arrayProductos={arrayProductos}
-					setProducto={setProducto}
-				/>
+			<Producto
+				arrayShoppingCart={arrayShoppingCart}
+				setShoppingCart={setShoppingCart}
+				arrayProductos={arrayProductos}
+				setProducto={setProducto}
+			/>
+
 
 			<div className={styles.Carrito}>
 				<h2>Carrito de Compras ({arrayShoppingCart.length})</h2>
@@ -90,6 +111,7 @@ const ListaProductos = ({arrayProductos,arrayShoppingCart,setProducto,setShoppin
 					);
 				})}
 			</div>
+
 		</div>
 	);
 };
