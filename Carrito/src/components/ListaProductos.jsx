@@ -5,6 +5,7 @@ import Producto from "./Producto"
 const ListaProductos = ({arrayProductos,arrayShoppingCart,setProducto,setShoppingCart}) => {
 
 const [cont, setCont] = useState(0);	
+const [descuento, setDescuento] = useState(0);	
 const [totalPagar, settotalPagar] = useState(0);	
 
 	useEffect(
@@ -13,6 +14,7 @@ const [totalPagar, settotalPagar] = useState(0);
 			let contador = 0;
 			if (arrayShoppingCart.length === 0) {
 				settotalPagar(0);
+				setDescuento(0);
 				setCont(0);
 			} else {
 				for (var i = 0; i < arrayShoppingCart.length; i++) {
@@ -22,6 +24,7 @@ const [totalPagar, settotalPagar] = useState(0);
 					contador = contador + arrayShoppingCart[i].cantDisponible;
 				}
 				settotalPagar(total);
+				setDescuento(0);
 				setCont(contador);
 			}
 			
@@ -51,6 +54,18 @@ const [totalPagar, settotalPagar] = useState(0);
 			setProducto(quitarPiezaListaProductos);
 		} else alert('Ya no hay unidades Disponibles de este producto');
 	};
+
+	const asignarDescuento = ({target})=>{
+		if(target.value<101){
+			setDescuento(target.value)
+		}else{
+			alert("El descuento no puede ser mayor a 100$")
+		}
+	}
+
+	const crearDescuento = ()=>{
+		settotalPagar(totalPagar-descuento)
+	}
 
 	const quitarPiezas = array => {
 		//array es el arreglo de los productos del carrito y existe es el de todo el listado de productos
@@ -118,13 +133,13 @@ const [totalPagar, settotalPagar] = useState(0);
 				</div>
 
 				<div className={styles.Summary}>
-					<h2>Total a Pagar:</h2>
-					<input type="text" placeholder="Valor Descuento" />
-					<button>Aplicar</button>
+					<h2>Total a Pagar: {totalPagar}$</h2>
+					<input type="number" placeholder="Valor Descuento" value={descuento} onChange={asignarDescuento}/>
+					<button onClick={crearDescuento}>Aplicar</button>
 					<hr />
 					<h3>Subtotal: </h3><p>{totalPagar}$</p>
 					<h3>Envío: </h3><p>GRATIS</p>
-					<h3>Cupón: </h3><p>$</p>
+					<h3>Cupón: </h3><p>{descuento}$</p>
 
 				</div>
 
